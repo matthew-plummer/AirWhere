@@ -2,19 +2,42 @@
 <html>
 <head>
     <meta charset='utf-8' />
-    <title>Ultra Mega Cool and also Sweet Time Slider</title>
+    
+    //We can change the title on the tab here, but we're still in the meta data, so nothing under <head>
+    //will actually change anything on the page
+    
+    <title>AirWhere</title>
+    
+    //This just changes the content position on the page, I think we should leave it the same
+    
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    
+    //<script> and <link> in the <head> section are js and css libraries, so if we need more libraries
+    //in addition to mapbox and d3 we can throw them in this section
+    
     <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.50.0/mapbox-gl.js'></script>
     <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
     <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.50.0/mapbox-gl.css' rel='stylesheet' />
+    
+    //There's some css in the metadata here. I don't really know what it's doing, but it looks like it's
+    //determining the position of the map and content (<body>) on the webpage
+    
     <style>
         body { margin:0; padding:0; }
         #map { position:absolute; top:0; bottom:0; width:100%; }
     </style>
 </head>
+
+//Now this is the jazz that's gonna be visible in AirWhere
+
 <body>
 
+//CSS IN THE HOUSE, thing's are about to get real aesthetically pleasing
+
 <style>
+
+//This is for the map overlays (time slider and legend boxes). Attributes can be adjusted here.
+
 .map-overlay {
     font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
     position: absolute;
@@ -24,6 +47,8 @@
     padding: 10px;
 }
 
+//This is for attributes inside the boxes (background color, etc.)
+
 .map-overlay .map-overlay-inner {
     background-color: #fff;
     box-shadow:0 1px 2px rgba(0, 0, 0, 0.20);
@@ -32,17 +57,23 @@
     margin-bottom: 10px;
 }
 
+//This is the design for the title of the boxes
+
 .map-overlay h2 {
     line-height: 24px;
     display: block;
     margin: 0 0 10px;
 }
 
+//This is the design for the legend bar within the legend box (which I doubt we will need)
+
 .map-overlay .legend .bar {
     height: 10px;
     width: 100%;
     background: linear-gradient(to right, #FCA107, #7F3121);
 }
+
+//This is the desgin for the slider
 
 .map-overlay input {
     background-color: transparent;
@@ -54,15 +85,30 @@
 }
 </style>
 
+//Back to HTML and we are making containers such as 'map' right here
+
 <div id='map'></div>
+
+//Within the map container we are making a map-overlay container with a map-overlay-inner container inside
 
 <div class='map-overlay top'>
     <div class='map-overlay-inner'>
+    
+    //Writing text directly into the map-overlay-inner container
+        
         <h2>Significant earthquakes in 2015</h2>
+        
+        //Here we are making sure the month label is put next to the slider
+        
         <label id='month'></label>
+        
+        //Now we identify the parameters of the slider (will be used to identify months later)
+        
         <input id='slider' type='range' min='0' max='11' step='1' value='0' />
     </div>
     <div class='map-overlay-inner'>
+        
+        /
         <div id='legend' class='legend'>
             <div class='bar'></div>
             <div>Magnitude (m)</div>
