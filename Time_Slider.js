@@ -1,9 +1,9 @@
-mapboxgl.accessToken = 'pk.eyJ1IjoibWpwNTkxNCIsImEiOiJjamx3cmVkc2UwMzAwM2xuODF3cnZkYXk3In0.-XprkrPqQiVNJvWTNH0zqw';
+mapboxgl.accessToken = 'pk.eyJ1IjoiY2JrNTA2NCIsImEiOiJjamRtMjYyeG4wZjJtMnhwOHhhbHBzeG9uIn0.dW5c9hLJ2FrRuWTL6d62eA';
 var map = new mapboxgl.Map({
     container: 'map',
-    style: 'mapbox://styles/mapbox/light-v9',
-    center: [31.4606, 20.7927],
-    zoom: 0.5
+    style: 'mapbox://styles/cbk5064/cjnmey97w15tu2slnx4hdmvfo',
+    center: [-96, 40],
+    zoom: 4
 });
 
 var months = [
