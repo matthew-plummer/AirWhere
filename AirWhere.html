@@ -5,7 +5,8 @@
     <meta charset='utf-8' />
     <title>AirWhere</title>
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
-    <script> mapboxgl.accessToken = 'pk.eyJ1IjoibWpwNTkxNCIsImEiOiJjamx3cmVkc2UwMzAwM2xuODF3cnZkYXk3In0.-XprkrPqQiVNJvWTNH0zqw';
+    <script src="usa_airports.js"></script>
+    <script> mapboxgl.accessToken = 'pk.eyJ1Ijoiam1rNjQzNiIsImEiOiJjamRtM2U0bDQwZ2RnMnFvNHluMWR2Zjg1In0.9-Q_u-oGKWoq54QDssVViQ';
         var map = new mapboxgl.Map({
             container: 'map',
             style: 'mapbox://styles/mapbox/light-v9',
@@ -15,7 +16,6 @@
     </script>
     <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.50.0/mapbox-gl.js'></script>
     <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
-    <script src="usa_airports.geojson"></script>
     <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.50.0/mapbox-gl.css' rel='stylesheet' />
     <style>
         body {
@@ -51,10 +51,18 @@
     </div>
     </div>
 
+    <script> map.on('load', function addAirports() {
+        map.addLayer({
+            "id": "Airports",
+            "type": "circle",
+            "source": {
+                "type": "geojson",
+                "data": usa_airports
+             }
+             })
+             }) </script>
     <script src="http://d3js.org/d3.v3.min.js" charset='utf-8'></script>
     <script src='Time_Slider.js'></script>
-    <script src='ToggleButtons.js'></script>
-    <script src='MapLayers.js'></script>
 
 </body>
 

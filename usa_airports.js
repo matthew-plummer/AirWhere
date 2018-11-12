@@ -1,5 +1,5 @@
-{
-	"type": "FeatureCollection",
+var usa_airports = {
+	"type": "geojson",
 	"features": [{
 		"type": "Feature",
 		"geometry": {

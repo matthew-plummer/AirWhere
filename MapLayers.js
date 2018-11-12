@@ -2,7 +2,7 @@ map.on('load', function () {
 
     map.addSource('Airports', {
         type: 'geojson',
-        data: usa_airports
+        data: 'usa_airports.js'
     });
 
     map.addLayer({
