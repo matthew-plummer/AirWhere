@@ -8,6 +8,7 @@
     <script src="Bike_Thefts_sample.js"></script>
     <!--<script src="myMain.js"></script> -->
     <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.51.0/mapbox-gl.js'></script>
+    <!--<link href="mapPosition.css" rel= "stylesheet"/>-->
     <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.51.0/mapbox-gl.css' rel='stylesheet' />
     <link rel="stylesheet" href="myStylesheet.css" />
     <style>
@@ -18,9 +19,10 @@
 
         #map {
             position: absolute;
-            top: 0;
-            bottom: 0;
-            width: 100%;
+            top: 50px;
+            left: 25px;
+            width: 75%;
+            height: 50%;
         }
     </style>
 </head>
@@ -106,32 +108,24 @@
             if (item.className == "on") {
                 item.className = "off";
                 if (item.id == "United") {
-                    map.removeLayer("United1")
+                    map.setLayoutProperty("United1", 'visibility', 'none');
                 } else if (item.id == "Southwest") {
-                    map.removeLayer("Southwest1")
+                    map.setLayoutProperty("Southwest1", 'visibility', 'none');
                 } else if (item.id == "Delta") {
-                    map.removeLayer("Delta1")
+                    map.setLayoutProperty("Delta1", 'visibility', 'none');
                 } else if (item.id == "American") {
-                    map.removeLayer("American1")
+                    map.setLayoutProperty("American1", 'visibility', 'none');
                 }
             } else {
                 item.className = "on";
                 if (item.id == "United") {
-                    if (Number(feature.properties["Stolen Value"]) < 100) {
-                        return true
-                    }
+                    map.setLayoutProperty("United1", 'visibility', 'visible');
                 } else if (item.id == "Southwest") {
-                    if (Number(feature.properties["Stolen Value"]) >= 100 && Number(feature.properties["Stolen Value"]) < 200) {
-                        return true
-                    }
+                    map.setLayoutProperty("Southwest1", 'visibility', 'visible');
                 } else if (item.id == "Delta") {
-                    if (Number(feature.properties["Stolen Value"]) >= 200 && Number(feature.properties["Stolen Value"]) < 400) {
-                        return true
-                    }
+                    map.setLayoutProperty("Delta1", 'visibility', 'visible');
                 } else if (item.id == "American") {
-                    if (Number(feature.properties["Stolen Value"]) >= 400) {
-                        return true
-                    }
+                    map.setLayoutProperty("American1", 'visibility', 'visible');
                 }
             }
         }
@@ -149,14 +143,12 @@
         var map = new mapboxgl.Map({
             container: 'map',
             style: 'mapbox://styles/mapbox/light-v9',
-            center: [-75.3, 40.0],
+            center: [-75.15, 39.95],
             zoom: 11,
             width: 300,
             height: 300
         });
-
-        map.on('load', function () {
-
+        function addUnited() {
             map.addLayer({
                 "id": "United1",
                 "type": "circle",
@@ -167,9 +159,12 @@
 
             });
 
+
             map.setFilter('United1', ['==', 'UCR', '625'])
 
+        };
 
+        function addSouthwest() {
             map.addLayer({
                 "id": "Southwest1",
                 "type": "circle",
@@ -181,8 +176,9 @@
             });
 
             map.setFilter('Southwest1', ['==', 'UCR', '615'])
+        };
 
-
+        function addDelta() {
             map.addLayer({
                 "id": "Delta1",
                 "type": "circle",
@@ -194,8 +190,9 @@
             });
 
             map.setFilter('Delta1', ['==', 'UCR', '635'])
+        };
 
-
+        function addAmerican() {
             map.addLayer({
                 "id": "American1",
                 "type": "circle",
@@ -207,6 +204,12 @@
             });
 
             map.setFilter('American1', ['==', 'UCR', '645'])
+        };
+        map.on('load', function () {
+            addUnited();
+            addSouthwest();
+            addDelta();
+            addAmerican();
         });
     </script>
 
