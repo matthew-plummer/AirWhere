@@ -6,14 +6,6 @@
     <title>AirWhere</title>
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
     <script src="usa_airports.js"></script>
-    <script> mapboxgl.accessToken = 'pk.eyJ1Ijoiam1rNjQzNiIsImEiOiJjamRtM2U0bDQwZ2RnMnFvNHluMWR2Zjg1In0.9-Q_u-oGKWoq54QDssVViQ';
-        var map = new mapboxgl.Map({
-            container: 'map',
-            style: 'mapbox://styles/mapbox/light-v9',
-            center: [31.4606, 20.7927],
-            zoom: 0.5
-        });
-    </script>
     <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.50.0/mapbox-gl.js'></script>
     <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
     <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.50.0/mapbox-gl.css' rel='stylesheet' />
@@ -50,7 +42,14 @@
         </div>
     </div>
     </div>
-
+    <script> mapboxgl.accessToken = 'pk.eyJ1IjoiY2JrNTA2NCIsImEiOiJjamRtMjYyeG4wZjJtMnhwOHhhbHBzeG9uIn0.dW5c9hLJ2FrRuWTL6d62eA';
+        var map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/cbk5064/cjnmey97w15tu2slnx4hdmvfo',
+            center: [-96, 40],
+            zoom: 4
+        });
+    </script>
     <script> map.on('load', function addAirports() {
         map.addLayer({
             "id": "Airports",
