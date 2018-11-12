@@ -5,12 +5,12 @@
     <meta charset='utf-8' />
     <title>Bike Thefts</title>
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
-    <script src="Bike_Thefts_sample.js"></script>
-    <!--<script src="myMain.js"></script> -->
+    <!--<script src="Bike_Thefts_sample.js"></script> -->
+    <script src="Jan17_DFW_Final.js"></script>
     <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.51.0/mapbox-gl.js'></script>
     <!--<link href="mapPosition.css" rel= "stylesheet"/>-->
     <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.51.0/mapbox-gl.css' rel='stylesheet' />
-    <link rel="stylesheet" href="myStylesheet.css" />
+    <!-- <link rel="stylesheet" href="myStylesheet.css" />--> 
     <style>
         body {
             margin: 0;
@@ -20,9 +20,9 @@
         #map {
             position: absolute;
             top: 50px;
-            left: 25px;
-            width: 75%;
-            height: 50%;
+            left: 0px;
+            width: 100%;
+            height: 95%;
         }
     </style>
 </head>
@@ -139,76 +139,28 @@
 
 
     <script>
-        mapboxgl.accessToken = 'pk.eyJ1Ijoiam1rNjQzNiIsImEiOiJjamRtM2U0bDQwZ2RnMnFvNHluMWR2Zjg1In0.9-Q_u-oGKWoq54QDssVViQ';
+        mapboxgl.accessToken = 'pk.eyJ1IjoiY2JrNTA2NCIsImEiOiJjamRtMjYyeG4wZjJtMnhwOHhhbHBzeG9uIn0.dW5c9hLJ2FrRuWTL6d62eA';
         var map = new mapboxgl.Map({
             container: 'map',
-            style: 'mapbox://styles/mapbox/light-v9',
-            center: [-75.15, 39.95],
-            zoom: 11,
-            width: 300,
-            height: 300
+            style: 'mapbox://styles/cbk5064/cjnmey97w15tu2slnx4hdmvfo',
+            center: [-96, 40],
+            zoom: 4
         });
-        function addUnited() {
-            map.addLayer({
-                "id": "United1",
-                "type": "circle",
-                "source": {
-                    "type": "geojson",
-                    "data": bikeThefts
-                },
-
-            });
-
-
-            map.setFilter('United1', ['==', 'UCR', '625'])
-
-        };
-
-        function addSouthwest() {
-            map.addLayer({
-                "id": "Southwest1",
-                "type": "circle",
-                "source": {
-                    "type": "geojson",
-                    "data": bikeThefts
-                },
-
-            });
-
-            map.setFilter('Southwest1', ['==', 'UCR', '615'])
-        };
-
-        function addDelta() {
-            map.addLayer({
-                "id": "Delta1",
-                "type": "circle",
-                "source": {
-                    "type": "geojson",
-                    "data": bikeThefts
-                },
-
-            });
-
-            map.setFilter('Delta1', ['==', 'UCR', '635'])
-        };
 
         function addAmerican() {
             map.addLayer({
                 "id": "American1",
-                "type": "circle",
+                "type": "line",
                 "source": {
                     "type": "geojson",
-                    "data": bikeThefts
+                    "data": DFW_flights
                 },
 
             });
 
-            map.setFilter('American1', ['==', 'UCR', '645'])
+            map.setFilter('American1', ['==', 'OP_UNIQUE_', 'AA'])
         };
         map.on('load', function () {
-            addUnited();
-            addSouthwest();
-            addDelta();
             addAmerican();
         });
     </script>
