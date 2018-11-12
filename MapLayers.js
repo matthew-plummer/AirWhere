@@ -2,7 +2,7 @@ map.on('load', function () {
 
     map.addSource('Airports', {
         type: 'geojson',
-        data: "https://github.com/matthew-plummer/AirWhere/blob/master/usa_airports.geojson"
+        data: usa_airports
     });
 
     map.addLayer({
