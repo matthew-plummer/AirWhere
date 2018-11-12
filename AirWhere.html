@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset='utf-8' />
     <title>AirWhere</title>
@@ -8,32 +9,44 @@
     <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
     <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.50.0/mapbox-gl.css' rel='stylesheet' />
     <style>
-        body { margin:0; padding:0; }
-        #map { position:absolute; top:0; bottom:0; width:100%; }
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        #map {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 100%;
+        }
     </style>
 </head>
+
 <body>
 
-<link href="Time_Slider.css" rel="stylesheet" type="text/css"/>
+    <link href="Time_Slider.css" rel="stylesheet" type="text/css" />
 
-<div id='map'></div>
+    <div id='map'></div>
 
-<div class='map-overlay top'>
-    <div class='map-overlay-inner'>
-        <h2>Significant earthquakes in 2015</h2>
-        <label id='month'></label>
-        <input id='slider' type='range' min='0' max='11' step='1' value='0' />
-    </div>
-    <div class='map-overlay-inner'>
-        <div id='legend' class='legend'>
-            <div class='bar'></div>
-            <div>Magnitude (m)</div>
+    <div class='map-overlay top'>
+        <div class='map-overlay-inner'>
+            <h2>Month of Flight</h2>
+            <label id='month'></label>
+            <input id='slider' type='range' min='0' max='11' step='1' value='0' />
+        </div>
+        <div class='map-overlay-inner'>
+            <input id='slider' type='range' min='0' max='11' step='1' value='0' />
+            <div>Time of Day</div>
         </div>
     </div>
-</div>
+    </div>
 
-<script src="http://d3js.org/d3.v3.min.js" charset='utf-8'></script>
-<script src='Time_Slider.js'></script>
+    <script src="http://d3js.org/d3.v3.min.js" charset='utf-8'></script>
+    <script src='Time_Slider.js'></script>
+    <script src='ToggleButtons.js'></script>
+    <script src='MapLayers.js'></script>
 
 </body>
+
 </html>
