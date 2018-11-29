@@ -1,9 +1,11 @@
 <!DOCTYPE html>
-<html><head>
+<html>
+
+<head>
     <meta charset='utf-8' />
     <title>AirWhere</title>
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
-    <script src="usa_airports.js"></script>
+    <script src="Airports_Dec17.js"></script>
     <script src="Jan17_DFW_Final.js"></script>
     <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.50.0/mapbox-gl.js'></script>
     <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
@@ -26,21 +28,21 @@
 
 <body>
 
-        <style>
-                .center {
-                    text-align: center;
-                }
-            </style>
-        
-            <style type="text/css">
-                .on {
-                    background: rgb(0, 200, 34);
-                }
-        
-                .off {
-                    background: rgb(180, 180, 180);
-                }
-            </style>
+    <style>
+        .center {
+            text-align: center;
+        }
+    </style>
+
+    <style type="text/css">
+        .on {
+            background: rgb(0, 200, 34);
+        }
+
+        .off {
+            background: rgb(180, 180, 180);
+        }
+    </style>
 
     <link href="Time_Slider.css" rel="stylesheet" type="text/css" />
 
@@ -48,9 +50,9 @@
 
     <div class='map-overlay top'>
         <div class='map-overlay-inner'>
-            <h2>Time of Day</h2>
+            <h2>Month of Flight</h2>
             <label id='month'></label>
-            <input id='slider' type='range' min='0' max='3' step='1' value='0' />
+            <input id='slider' type='range' min='0' max='11' step='1' value='0' />
         </div>
         <div class='map-overlay-inner'>
             <input id='slider' type='range' min='0' max='3' step='1' value='0' />
@@ -67,15 +69,21 @@
         });
     </script>
     <script> map.on('load', function addAirports() {
-        map.addLayer({
-            "id": "Airports",
-            "type": "circle",
-            "source": {
-                "type": "geojson",
-                "data": usa_airports
-             }
-             })
-             }) </script>
+            map.addLayer({
+                "id": "Airports",
+                "type": "symbol",
+                "source": {
+                    "type": "geojson",
+                    "data": usa_airports
+                },
+                "layout": {
+                    "icon-image": "airport-15",
+                    "icon-size": 0.7
+                }
+            })
+        })   
+    </script>
+
     <script src="http://d3js.org/d3.v3.min.js" charset='utf-8'></script>
     <script src='Time_Slider.js'></script>
 
@@ -116,7 +124,36 @@
 
 
     <script>
-       function addAmerican() {
+        function addAmerican2() {
+            map.addLayer({
+                "id": "American2",
+                "type": "line",
+                "source": {
+                    "type": "geojson",
+                    "data": DFW_flights
+                },
+                "paint": {
+                    "line-opacity": 0.1,
+                    "line-color": '#1155cc',
+                    "line-width": 2
+                }
+
+            });
+
+            map.setFilter('American2', ['==', 'OP_UNIQUE_', 'AA']);
+            map.setFilter('American2', ['<', 'ARR_DELAY', 15]);
+
+            /*if (Number(feature.properties.ARR_DELAY) >= 15) {
+                map.setPaintProperty("American1", 'line-color', '#bb1122')
+            } else {
+                map.setPaintProperty("American1", 'line-color', '#11bb88')
+            }*/
+        };
+        map.on('load', function () {
+            addAmerican2();
+        });
+
+        function addAmerican() {
             map.addLayer({
                 "id": "American1",
                 "type": "line",
@@ -124,14 +161,28 @@
                     "type": "geojson",
                     "data": DFW_flights
                 },
+                "paint": {
+                    "line-opacity": 0.1,
+                    "line-color": '#bb1122',
+                    "line-width": 3
+                }
 
             });
 
-            map.setFilter('American1', ['==', 'OP_UNIQUE_', 'AA'])
+            map.setFilter('American1', ['==', 'OP_UNIQUE_', 'AA']);
+            map.setFilter('American1', ['>=', 'ARR_DELAY', 15]);
+
+            /*if (Number(feature.properties.ARR_DELAY) >= 15) {
+                map.setPaintProperty("American1", 'line-color', '#bb1122')
+            } else {
+                map.setPaintProperty("American1", 'line-color', '#11bb88')
+            }*/
         };
         map.on('load', function () {
             addAmerican();
         });
+
+
     </script>
 
 
