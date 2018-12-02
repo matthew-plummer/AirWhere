@@ -1,4 +1,6 @@
-mapboxgl.accessToken = 'pk.eyJ1IjoiY2JrNTA2NCIsImEiOiJjamRtMjYyeG4wZjJtMnhwOHhhbHBzeG9uIn0.dW5c9hLJ2FrRuWTL6d62eA';
+filter: ['==', ['number', ['get', 'DEP_TIME']], 1846]
+
+/*mapboxgl.accessToken = 'pk.eyJ1IjoiY2JrNTA2NCIsImEiOiJjamRtMjYyeG4wZjJtMnhwOHhhbHBzeG9uIn0.dW5c9hLJ2FrRuWTL6d62eA';
 var map = new mapboxgl.Map({
     container: 'map',
     style: 'mapbox://styles/cbk5064/cjnmey97w15tu2slnx4hdmvfo',
@@ -104,4 +106,4 @@ map.on('load', function () {
             filterBy(month);
         });
     });
-});
+}); */

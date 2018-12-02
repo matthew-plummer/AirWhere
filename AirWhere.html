@@ -10,6 +10,8 @@
     <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.50.0/mapbox-gl.js'></script>
     <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
     <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.50.0/mapbox-gl.css' rel='stylesheet' />
+    <!--<link href='https://api.mapbox.com/mapbox-gl-js/v0.51.0/mapbox-gl.css' rel='stylesheet' />-->
+
     <style>
         body {
             margin: 0;
@@ -50,140 +52,146 @@
 
     <div class='map-overlay top'>
         <div class='map-overlay-inner'>
-            <h2>Month of Flight</h2>
-            <label id='month'></label>
-            <input id='slider' type='range' min='0' max='11' step='1' value='0' />
+            <div class='session' id='sliderbar'>
+                <h2>Hour: <label id='active-hour'>12PM</label></h2>
+                <input id='slider' class='row' type='range' min='0' max='2300' step='1' value='1' />
+            </div>
         </div>
-        <div class='map-overlay-inner'>
-            <input id='slider' type='range' min='0' max='3' step='1' value='0' />
-            <div>Time of Day</div>
-        </div>
-    </div>
-    </div>
-    <script> mapboxgl.accessToken = 'pk.eyJ1IjoiY2JrNTA2NCIsImEiOiJjamRtMjYyeG4wZjJtMnhwOHhhbHBzeG9uIn0.dW5c9hLJ2FrRuWTL6d62eA';
-        var map = new mapboxgl.Map({
-            container: 'map',
-            style: 'mapbox://styles/cbk5064/cjnmey97w15tu2slnx4hdmvfo',
-            center: [-96, 40],
-            zoom: 4
-        });
-    </script>
-    <script> map.on('load', function addAirports() {
-            map.addLayer({
-                "id": "Airports",
-                "type": "symbol",
-                "source": {
-                    "type": "geojson",
-                    "data": usa_airports
-                },
-                "layout": {
-                    "icon-image": "airport-15",
-                    "icon-size": 0.7
-                }
+        <script> mapboxgl.accessToken = 'pk.eyJ1IjoiY2JrNTA2NCIsImEiOiJjamRtMjYyeG4wZjJtMnhwOHhhbHBzeG9uIn0.dW5c9hLJ2FrRuWTL6d62eA';
+            var map = new mapboxgl.Map({
+                container: 'map',
+                style: 'mapbox://styles/cbk5064/cjnmey97w15tu2slnx4hdmvfo',
+                center: [-96, 40],
+                zoom: 4
+            });
+        </script>
+        <script> map.on('load', function addAirports() {
+                map.addLayer({
+                    "id": "Airports",
+                    "type": "symbol",
+                    "source": {
+                        "type": "geojson",
+                        "data": usa_airports
+                    },
+                    "layout": {
+                        "icon-image": "airport-15",
+                        "icon-size": 0.7
+                    }
+                })
             })
-        })   
-    </script>
 
-    <script src="http://d3js.org/d3.v3.min.js" charset='utf-8'></script>
-    <script src='Time_Slider.js'></script>
+        </script>
 
 
-    <script language="javascript">
-        function toggleState(item) {
-            if (item.className == "on") {
-                item.className = "off";
-                if (item.id == "United") {
-                    map.setLayoutProperty("United1", 'visibility', 'none');
-                } else if (item.id == "Southwest") {
-                    map.setLayoutProperty("Southwest1", 'visibility', 'none');
-                } else if (item.id == "Delta") {
-                    map.setLayoutProperty("Delta1", 'visibility', 'none');
-                } else if (item.id == "American") {
-                    map.setLayoutProperty("American1", 'visibility', 'none');
-                }
-            } else {
-                item.className = "on";
-                if (item.id == "United") {
-                    map.setLayoutProperty("United1", 'visibility', 'visible');
-                } else if (item.id == "Southwest") {
-                    map.setLayoutProperty("Southwest1", 'visibility', 'visible');
-                } else if (item.id == "Delta") {
-                    map.setLayoutProperty("Delta1", 'visibility', 'visible');
-                } else if (item.id == "American") {
-                    map.setLayoutProperty("American1", 'visibility', 'visible');
+
+        <script language="javascript">
+            function toggleState(item) {
+                if (item.className == "on") {
+                    item.className = "off";
+                    if (item.id == "United") {
+                        map.setLayoutProperty("United1", 'visibility', 'none');
+                    } else if (item.id == "Southwest") {
+                        map.setLayoutProperty("Southwest1", 'visibility', 'none');
+                    } else if (item.id == "Delta") {
+                        map.setLayoutProperty("Delta1", 'visibility', 'none');
+                    } else if (item.id == "American") {
+                        map.setLayoutProperty("American1", 'visibility', 'none');
+                    }
+                } else {
+                    item.className = "on";
+                    if (item.id == "United") {
+                        map.setLayoutProperty("United1", 'visibility', 'visible');
+                    } else if (item.id == "Southwest") {
+                        map.setLayoutProperty("Southwest1", 'visibility', 'visible');
+                    } else if (item.id == "Delta") {
+                        map.setLayoutProperty("Delta1", 'visibility', 'visible');
+                    } else if (item.id == "American") {
+                        map.setLayoutProperty("American1", 'visibility', 'visible');
+                    }
                 }
             }
-        }
-    </script>
 
-    <button type="button" id="United" class="on" onclick="toggleState(this)"> United </button>
-    <button type="button" id="Southwest" class="on" onclick="toggleState(this)"> Southwest </button>
-    <button type="button" id="Delta" class="on" onclick="toggleState(this)"> Delta </button>
-    <button type="button" id="American" class="on" onclick="toggleState(this)"> American </button>
+        </script>
+
+        <button type="button" id="United" class="on" onclick="toggleState(this)"> United </button>
+        <button type="button" id="Southwest" class="on" onclick="toggleState(this)"> Southwest </button>
+        <button type="button" id="Delta" class="on" onclick="toggleState(this)"> Delta </button>
+        <button type="button" id="American" class="on" onclick="toggleState(this)"> American </button>
 
 
 
-    <script>
-        function addAmerican2() {
-            map.addLayer({
-                "id": "American2",
-                "type": "line",
-                "source": {
-                    "type": "geojson",
-                    "data": DFW_flights
-                },
-                "paint": {
-                    "line-opacity": 0.1,
-                    "line-color": '#1155cc',
-                    "line-width": 2
-                }
+        <script>
+            function addAmerican2() {
+                map.addLayer({
+                    "id": "American2",
+                    "type": "line",
+                    "source": {
+                        "type": "geojson",
+                        "data": DFW_flights
+                    },
+                    "paint": {
+                        "line-opacity": 0.1,
+                        "line-color": '#1155cc',
+                        "line-width": 2
+                    }
 
+                });
+
+                map.setFilter('American2', ['==', 'OP_UNIQUE_', 'AA']);
+                map.setFilter('American2', ['<', 'ARR_DELAY', 15]);
+
+                /*if (Number(feature.properties.ARR_DELAY) >= 15) {
+                    map.setPaintProperty("American1", 'line-color', '#bb1122')
+                } else {
+                    map.setPaintProperty("American1", 'line-color', '#11bb88')
+                }*/
+            };
+            map.on('load', function () {
+                addAmerican2();
+            }); 
+
+            function addAmerican() {
+                map.addLayer({
+                    "id": "American1",
+                    "type": "line",
+                    "source": {
+                        "type": "geojson",
+                        "data": DFW_flights
+                    },
+                    "paint": {
+                        "line-opacity": 0.1,
+                        "line-color": '#bb1122',
+                        "line-width": 3
+                    }
+
+                });
+
+                map.setFilter('American1', ['==', 'OP_UNIQUE_', 'AA']);
+                map.setFilter('American1', ['>=', 'ARR_DELAY', 15]);
+
+                /*if (Number(feature.properties.ARR_DELAY) >= 15) {
+                    map.setPaintProperty("American1", 'line-color', '#bb1122')
+                } else {
+                    map.setPaintProperty("American1", 'line-color', '#11bb88')
+                }*/
+            };
+            map.on('load', function () {
+                addAmerican();
             });
 
-            map.setFilter('American2', ['==', 'OP_UNIQUE_', 'AA']);
-            map.setFilter('American2', ['<', 'ARR_DELAY', 15]);
+            document.getElementById('slider').addEventListener('input', function (e) {
+                var hour = parseInt(e.target.value);
+                // update the map
+                map.setFilter('American1', ['==', ['number', ['get', 'DEP_TIME']], hour]);
+                map.setFilter('American2', ['==', ['number', ['get', 'DEP_TIME']], hour]);
 
-            /*if (Number(feature.properties.ARR_DELAY) >= 15) {
-                map.setPaintProperty("American1", 'line-color', '#bb1122')
-            } else {
-                map.setPaintProperty("American1", 'line-color', '#11bb88')
-            }*/
-        };
-        map.on('load', function () {
-            addAmerican2();
-        });
-
-        function addAmerican() {
-            map.addLayer({
-                "id": "American1",
-                "type": "line",
-                "source": {
-                    "type": "geojson",
-                    "data": DFW_flights
-                },
-                "paint": {
-                    "line-opacity": 0.1,
-                    "line-color": '#bb1122',
-                    "line-width": 3
-                }
-
+                // update text in the UI
+                document.getElementById('active-hour').innerText = hour;
             });
 
-            map.setFilter('American1', ['==', 'OP_UNIQUE_', 'AA']);
-            map.setFilter('American1', ['>=', 'ARR_DELAY', 15]);
 
-            /*if (Number(feature.properties.ARR_DELAY) >= 15) {
-                map.setPaintProperty("American1", 'line-color', '#bb1122')
-            } else {
-                map.setPaintProperty("American1", 'line-color', '#11bb88')
-            }*/
-        };
-        map.on('load', function () {
-            addAmerican();
-        });
+        </script>
 
-
-    </script>
 
 
 </body>
