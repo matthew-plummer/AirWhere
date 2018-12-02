@@ -1,4 +1,4 @@
-filter: ['==', ['number', ['get', 'DEP_TIME']], 1846]
+
 
 /*mapboxgl.accessToken = 'pk.eyJ1IjoiY2JrNTA2NCIsImEiOiJjamRtMjYyeG4wZjJtMnhwOHhhbHBzeG9uIn0.dW5c9hLJ2FrRuWTL6d62eA';
 var map = new mapboxgl.Map({
