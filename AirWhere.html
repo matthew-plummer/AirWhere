@@ -382,24 +382,25 @@
                 map.setFilter('Delta1', ['==', ['number', ['get', 'DEP_TIME']], hour]);
                 map.setFilter('Delta2', ['==', ['number', ['get', 'DEP_TIME']], hour]);
 
-                if (hour = 0) {
-                    hour = "Redeye - Midnight to 6AM" 
+                if (hour == 0) {
+                    hour = "Redeye - Midnight to 6AM"
                 } else {
-                    if (hour = 1) {
+                    if (hour == 1) {
                         hour = "Morning - 6AM to 12PM"
                     } else {
-                        if (hour =2) {
+                        if (hour == 2) {
                             hour = "Afternoon - 12PM to 6PM"
                         } else {
-                            if (hour = 3) {
+                            if (hour == 3) {
                                 hour = "Evening - 6PM to Midnight"
 
+                            }
                         }
                     }
                 }
-
                 // update text in the UI
                 document.getElementById('active-hour').innerText = hour;
+
 
 
 
