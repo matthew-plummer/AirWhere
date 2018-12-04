@@ -26,7 +26,7 @@
             height: 95%;
         }
     </style>
-    
+
 </head>
 
 <body>
@@ -55,7 +55,7 @@
         <div class='map-overlay-inner'>
             <div class='session' id='sliderbar'>
                 <h2>Hour: <label id='active-hour'>All</label></h2>
-                <input id='slider' class='row' type='range' min='0' max='2300' step='100' value='1' />
+                <input id='slider' class='row' type='range' min='0' max='2400' step='600' value='0' />
             </div>
         </div>
         <script> mapboxgl.accessToken = 'pk.eyJ1IjoiY2JrNTA2NCIsImEiOiJjamRtMjYyeG4wZjJtMnhwOHhhbHBzeG9uIn0.dW5c9hLJ2FrRuWTL6d62eA';
@@ -68,7 +68,7 @@
 
             var popup = new mapboxgl.Popup({ closeOnClick: true })
                 .setLngLat([-96, 40])
-                .setHTML('<h1>Welcome to AirWhere Christmas, an app to help you see Christmas flight patterns!</h1>')
+                .setHTML('<h1>Welcome to AirWhere Christmas, an app to help you see Christmas flight patterns! Source: Bureau of Transportation Statistics. Geovisualization (GEOG 461W), Dept. of Geography: Colin Kelly cbk5064@psu.edu, Joshua Killian jmk6436@psu.edu, Matt Plummer, Prof. Alan M. MacEachren, and Arif Masrur</h1>')
                 .addTo(map);
 
         </script>
@@ -370,6 +370,8 @@
 
             document.getElementById('slider').addEventListener('input', function (e) {
                 var hour = parseInt(e.target.value);
+
+
                 // update the map
                 map.setFilter('American1', ['==', ['number', ['get', 'DEP_TIME']], hour]);
                 map.setFilter('American2', ['==', ['number', ['get', 'DEP_TIME']], hour]);
@@ -380,9 +382,29 @@
                 map.setFilter('Delta1', ['==', ['number', ['get', 'DEP_TIME']], hour]);
                 map.setFilter('Delta2', ['==', ['number', ['get', 'DEP_TIME']], hour]);
 
+                if (hour < 600) {
+                    hour = "Redeye - Midnight to 6AM" 
+                } else {
+                    if (hour >= 600 && hour < 1200) {
+                        hour = "Morning - 6AM to 12PM"
+                    } else {
+                        if (hour >= 1200 && hour < 1800) {
+                            hour = "Afternoon - 12PM to 6PM"
+                        } else {
+                            if (hour >= 1800)
+                                hour = "Evening - 6PM to Midnight"
+
+                        }
+                    }
+                }
+
                 // update text in the UI
                 document.getElementById('active-hour').innerText = hour;
+
+
+
             });
+
 
 
         </script>
