@@ -55,7 +55,7 @@
         <div class='map-overlay-inner'>
             <div class='session' id='sliderbar'>
                 <h2>Hour: <label id='active-hour'>All</label></h2>
-                <input id='slider' class='row' type='range' min='0' max='2400' step='600' value='0' />
+                <input id='slider' class='row' type='range' min='0' max='3' step='1' value='0' />
             </div>
         </div>
         <script> mapboxgl.accessToken = 'pk.eyJ1IjoiY2JrNTA2NCIsImEiOiJjamRtMjYyeG4wZjJtMnhwOHhhbHBzeG9uIn0.dW5c9hLJ2FrRuWTL6d62eA';
@@ -382,16 +382,16 @@
                 map.setFilter('Delta1', ['==', ['number', ['get', 'DEP_TIME']], hour]);
                 map.setFilter('Delta2', ['==', ['number', ['get', 'DEP_TIME']], hour]);
 
-                if (hour < 600) {
+                if (hour = 0) {
                     hour = "Redeye - Midnight to 6AM" 
                 } else {
-                    if (hour >= 600 && hour < 1200) {
+                    if (hour = 1) {
                         hour = "Morning - 6AM to 12PM"
                     } else {
-                        if (hour >= 1200 && hour < 1800) {
+                        if (hour =2) {
                             hour = "Afternoon - 12PM to 6PM"
                         } else {
-                            if (hour >= 1800)
+                            if (hour = 3) {
                                 hour = "Evening - 6PM to Midnight"
 
                         }
